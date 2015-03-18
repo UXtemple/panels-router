@@ -1,0 +1,94 @@
+{
+  "name": "panels-router",
+  "version": "0.1.0",
+  "description": "Panels router",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=production browserify . > ./dist/panels-router.js && uglifyjs ./dist/panels-router.js -cm > ./dist/panels-router.min.js",
+    "livereload": "livereloadify ./playground",
+    "start": "npm run watch & npm run livereload & npm run playground",
+    "playground": "./playground/run",
+    "test": "mocha --require mocha-babel.js $(find . -type d -name __tests__ -not -path './node_modules/*')",
+    "watch": "watchify -o ./playground/playground-compiled.js -v -d playground/playground.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UXtemple/panels-router"
+  },
+  "keywords": [
+    "panels",
+    "router"
+  ],
+  "author": "UXtemple Limited <hi@uxtemple.com>",
+  "contributors": [
+    "Darío Javier Cravero <dario@uxtemple.com>",
+    "Tom Parandyk <tom@uxtemple.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UXtemple/panels-router/issues"
+  },
+  "homepage": "https://github.com/UXtemple/panels-router",
+  "eslintConfig": {
+    "ecmaFeatures": {
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "defaultParams": true,
+      "forOf": true,
+      "jsx": true,
+      "templateStrings": true
+    },
+    "env": {
+      "browser": true,
+      "es6": true,
+      "mocha": true,
+      "node": true
+    },
+    "rules": {
+      "eqeqeq": 2,
+      "curly": 2,
+      "new-cap": false,
+      "quotes": [
+        2,
+        "single"
+      ],
+      "strict": 0
+    }
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "experimental": true
+        }
+      ],
+      "envify"
+    ]
+  },
+  "devDependencies": {
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
+    "chai": "^2.1.1",
+    "envify": "^3.3.0",
+    "jsdom": "^4.0.2",
+    "koa": "^0.18.1",
+    "koa-sendfile": "^1.1.0",
+    "koa-static": "^1.4.9",
+    "livereloadify": "^2.0.0",
+    "mocha": "^2.2.1",
+    "mocha-jsdom": "^0.2.1",
+    "uglify-js": "^2.4.16",
+    "watchify": "^2.4.0",
+    "webworker-threads": "^0.5.5"
+  },
+  "dependencies": {
+    "babel": "^4.7.12",
+    "immutable": "^3.6.4",
+    "marty": "git://github.com/dariocravero/marty#register-options",
+    "react": "^0.13.0",
+    "seamless-immutable": "^2.0.1",
+    "webworkify": "^1.0.2",
+    "xregexp": "git://github.com/slevithan/xregexp.git"
+  }
+}

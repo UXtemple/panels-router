@@ -1,0 +1,13 @@
+# Change log
+
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/).
+
+## [Unreleased][unreleased]
+
+## 0.1.0 - 2015-03-18
+### Added
+- `ActionCreators`, `Constants`, `history`, `Parser` and `Router`.
+  Flux constructs implemented through `Marty`.
+
+[unreleased]: https://github.com/UXtemple/panels-router/compare/v0.1.0...HEAD
