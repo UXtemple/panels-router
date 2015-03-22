@@ -37,7 +37,7 @@ Run it with `npm start`.
 ## worker-ised parser
 
 `parser-worker` can work as both a synchronous task or as a web worker.
-For the time being we've chosen to have it 
+For the time being we've chosen to have it synchronous.
 
 ```
 import Immutable from 'immutable'

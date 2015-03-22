@@ -29,26 +29,14 @@ let style = {
   }
 }
 
-class View extends Marty.Component {
-  constructor(props, context) {
-    super(props, context)
-    this.listenTo = PanelsRouter.Store
-  }
-
-  getState() {
-    return {
-      keys: PanelsRouter.Store.keys,
-      uri: PanelsRouter.Store.uri
-    }
-  }
-
+class View extends React.Component {
   navigateTo(event) {
     event.preventDefault()
     PanelsRouter.ActionCreators.navigate(event.target.href)
   }
 
   render() {
-    let keysView = this.state.keys.map((key, i) => {
+    let keysView = this.props.keys.map((key, i) => {
       return (
         <li key={i} style={style.link}>
           <a href={key} onClick={this.navigateTo.bind(this)}>{key}</a>
@@ -60,16 +48,32 @@ class View extends Marty.Component {
       <div>
         <div>
           <label htmlFor='uri' style={style.label}>URI to parse</label>
-          <input id='uri' ref='uri' value={this.state.uri} placeholder='original URI'
-            onChange={() => PanelsRouter.ActionCreators.navigate(this.refs.uri.getDOMNode().value)} style={style.input} />
+          <input id='uri' ref='uri' value={this.props.uri} placeholder='original URI'
+            onChange={() => PanelsRouter.ActionCreators.navigate(React.findDOMNode(this.refs.uri).value)} style={style.input} />
         </div>
         <ol>{keysView}</ol>
       </div>
     )
   }
 }
+View.propTypes = {
+  keys: React.PropTypes.object.isRequired,
+  uri: React.PropTypes.string.isRequired
+}
+View.defaultProps = {
+  keys: {},
+  uri: ''
+}
+
+let ViewContainer = Marty.createContainer(View, {
+  listenTo: PanelsRouter.Store,
+  fetch: {
+    keys() { return PanelsRouter.Store.keys },
+    uri() { return PanelsRouter.Store.uri }
+  }
+})
 
 PanelsRouter.history()
 PanelsRouter.ActionCreators.navigate(location.href)
 
-React.render(<View />, document.getElementById('playground-container'))
+React.render(<ViewContainer />, document.getElementById('playground-container'))
