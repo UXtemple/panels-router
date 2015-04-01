@@ -1,10 +1,10 @@
 {
   "name": "panels-router",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Panels router",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production browserify index.js --no-bundle-external -o ./dist/panels-router.js && uglifyjs ./dist/panels-router.js -cm -o ./dist/panels-router.min.js",
+    "build": "NODE_ENV=production browserify index.js --no-bundle-external --standalone PanelsRouter -o ./dist/panels-router.js && uglifyjs ./dist/panels-router.js -cm -o ./dist/panels-router.min.js",
     "livereload": "livereloadify ./playground",
     "start": "npm run watch & npm run livereload & npm run playground",
     "playground": "./playground/run",
@@ -82,9 +82,8 @@
     "watchify": "^2.4.0"
   },
   "dependencies": {
-    "babel": "^4.7.12",
-    "immutable": "^3.6.4",
-    "marty": "git://github.com/jhollingworth/marty#container",
+    "immutable": "^3.7.0",
+    "marty": "^0.9.6",
     "react": "^0.13.1",
     "xregexp": "git://github.com/slevithan/xregexp.git"
   }
