@@ -28,6 +28,11 @@ It implements `Flux` through `Marty`.
 - `#keys`: the list of panels' keys that represent the application
 - `#uri`: the application's URI
 
+## Install deps
+
+1. Get `iojs`. [Guide](https://gist.github.com/dariocravero/8db219777b277c29fc06).
+2. Install the deps `npm install && npm install -g babel-node`.
+
 ## Examples
 
 See `playground/playground.js`.
@@ -80,3 +85,6 @@ Darío Javier Cravero <dario@uxtemple.com>
 Tom Parandyk <tom@uxtemple.com>
 
 (c) 2015 UXtemple Limited <hi@uxtemple.com>
+
+https://usepanels.com
+https://UXtemple.com
