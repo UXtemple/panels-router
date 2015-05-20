@@ -3,19 +3,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
+## [0.2.0] - 2015-05-20
 
-## 0.1.1 - 2015-04-01
+### Changed
+
+- ES6 all the way
+- Marty for Flummox
+
+## [0.1.1] - 2015-04-01
 
 ### Changed
 
 - Updated dependencies.
 
-## 0.1.0 - 2015-03-18
+## [0.1.0] - 2015-03-18
+
 ### Added
 - `ActionCreators`, `Constants`, `history`, `Parser` and `Router`.
   Flux constructs implemented through `Marty`.
 
-[unreleased]: https://github.com/UXtemple/panels-router/compare/v0.1.0..master
-[unreleased]: https://github.com/UXtemple/panels-router/compare/v0.1.1..v0.1.0
-[unreleased]: https://github.com/UXtemple/panels-router/compare/v0.1.0..2271fb118a5130a1d2b782ad1f23f61f75af2fe1
+[unreleased]: https://github.com/UXtemple/panels-router/compare/master..v0.2.0
+[0.2.0]: https://github.com/UXtemple/panels-router/compare/v0.2.0..v0.1.1
+[0.1.1]: https://github.com/UXtemple/panels-router/compare/v0.1.1..v0.1.0
+[0.1.0]: https://github.com/UXtemple/panels-router/compare/v0.1.0..2271fb118a5130a1d2b782ad1f23f61f75af2fe1

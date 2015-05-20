@@ -1,15 +1,13 @@
 {
   "name": "panels-router",
-  "version": "0.1.1",
-  "description": "Panels router",
+  "version": "0.2.0",
+  "description": "A router for panels",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production browserify index.js --no-bundle-external --standalone PanelsRouter -o ./dist/panels-router.js && uglifyjs ./dist/panels-router.js -cm -o ./dist/panels-router.min.js",
-    "livereload": "livereloadify ./playground",
-    "start": "npm run watch & npm run livereload & npm run playground",
-    "playground": "./playground/run",
-    "test": "mocha --require mocha-babel.js $(find . -type d -name __tests__ -not -path './node_modules/*')",
-    "watch": "watchify -o ./playground/playground-compiled.js -v -d playground/playground.js"
+    "test": ".bin/test",
+    "prepublish": ".bin/compile",
+    "postpublish": ".bin/clean",
+    "start": ".bin/start"
   },
   "repository": {
     "type": "git",
@@ -17,9 +15,10 @@
   },
   "keywords": [
     "panels",
-    "router"
+    "feed",
+    "UXtemple"
   ],
-  "author": "UXtemple Limited <hi@uxtemple.com>",
+  "author": "UXtemple <hi@uxtemple.com>",
   "contributors": [
     "Darío Javier Cravero <dario@uxtemple.com>",
     "Tom Parandyk <tom@uxtemple.com>"
@@ -29,62 +28,29 @@
     "url": "https://github.com/UXtemple/panels-router/issues"
   },
   "homepage": "https://github.com/UXtemple/panels-router",
-  "eslintConfig": {
-    "ecmaFeatures": {
-      "arrowFunctions": true,
-      "blockBindings": true,
-      "defaultParams": true,
-      "forOf": true,
-      "jsx": true,
-      "templateStrings": true
-    },
-    "env": {
-      "browser": true,
-      "es6": true,
-      "mocha": true,
-      "node": true
-    },
-    "rules": {
-      "eqeqeq": 2,
-      "curly": 2,
-      "new-cap": false,
-      "quotes": [
-        2,
-        "single"
-      ],
-      "strict": 0
-    }
+  "dependencies": {
+    "flummox": "^4.0.0-alpha2",
+    "immutable": "^3.7.3",
+    "panels-ui": "^0.1.1",
+    "react": "^0.13.3",
+    "xregexp": "git://github.com/slevithan/xregexp.git"
+  },
+  "devDependencies": {
+    "babel": "^5.4.4",
+    "babelify": "^6.1.1",
+    "browserify": "^10.2.1",
+    "envify": "^3.4.0",
+    "livereloadify": "^2.0.0",
+    "mocha": "^2.2.5",
+    "node-static": "^0.7.6",
+    "react-native": "^0.4.4",
+    "sinon": "^1.14.1",
+    "watchify": "^3.2.1"
   },
   "browserify": {
     "transform": [
-      [
-        "babelify",
-        {
-          "experimental": true
-        }
-      ],
+      "babelify",
       "envify"
     ]
-  },
-  "devDependencies": {
-    "babelify": "^5.0.4",
-    "browserify": "^9.0.3",
-    "chai": "^2.1.1",
-    "envify": "^3.3.0",
-    "jsdom": "^4.0.2",
-    "koa": "^0.18.1",
-    "koa-sendfile": "^1.1.0",
-    "koa-static": "^1.4.9",
-    "livereloadify": "^2.0.0",
-    "mocha": "^2.2.1",
-    "mocha-jsdom": "^0.2.1",
-    "uglify-js": "^2.4.16",
-    "watchify": "^2.4.0"
-  },
-  "dependencies": {
-    "immutable": "^3.7.0",
-    "marty": "^0.9.6",
-    "react": "^0.13.1",
-    "xregexp": "git://github.com/slevithan/xregexp.git"
   }
 }
