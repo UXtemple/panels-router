@@ -1,6 +1,6 @@
 {
   "name": "panels-router",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A router for panels",
   "main": "index.js",
   "scripts": {
@@ -31,8 +31,6 @@
   "dependencies": {
     "flummox": "^4.0.0-alpha2",
     "immutable": "^3.7.3",
-    "panels-ui": "^0.1.1",
-    "react": "^0.13.3",
     "xregexp": "git://github.com/slevithan/xregexp.git"
   },
   "devDependencies": {
@@ -43,7 +41,7 @@
     "livereloadify": "^2.0.0",
     "mocha": "^2.2.5",
     "node-static": "^0.7.6",
-    "react-native": "^0.4.4",
+    "react": "^0.13.3",
     "sinon": "^1.14.1",
     "watchify": "^3.2.1"
   },
