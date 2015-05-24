@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.2] - 2015-05-24
+### Added
+
+- An `onChange` callback to history so that a registering app can tell when the history changed to
+  do stuff like updating the app's title.
+- `Store#lastPanelUri`.
+
+### Changed
+
+- Fixed history to actually pick up the store changes.
+
 ## [0.2.1] - 2015-05-20
 ### Changed
 

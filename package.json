@@ -1,12 +1,12 @@
 {
   "name": "panels-router",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A router for panels",
   "main": "index.js",
   "scripts": {
     "test": ".bin/test",
-    "prepublish": ".bin/compile",
-    "postpublish": ".bin/clean",
+    "prepublish": "if [ \"$NODE_ENV\" = production  ]; then .bin/compile; fi",
+    "postpublish": "if [ \"$NODE_ENV\" = production   ]; then .bin/clean; fi",
     "start": ".bin/start"
   },
   "repository": {

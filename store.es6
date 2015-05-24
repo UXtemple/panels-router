@@ -18,9 +18,11 @@ export default class RouterStore extends Store {
   }
 
   // @attr('keys')
-  get keys() { return this.state.keys; }
+  get keys() { return this.state.keys }
+  // @attr('lastPanelUri', () => this.keys.last()) // ?
+  get lastPanelUri() { return this.keys.last() }
   // @attr('uri')
-  get uri() { return this.state.uri; }
+  get uri() { return this.state.uri }
 
   navigate(uri) {
     this.setState(this.state.merge({
