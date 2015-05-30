@@ -1,6 +1,6 @@
 {
   "name": "panels-router",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A router for panels",
   "main": "index.js",
   "scripts": {

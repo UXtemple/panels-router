@@ -30,4 +30,10 @@ export default class RouterStore extends Store {
       keys: List(parse(uri))
     }));
   }
+
+  nextUri(after) {
+    const index = this.state.keys.findIndex(({currentUri}) => currentUri === after);
+    const nextKey = this.state.keys.get(index + 1);
+    return nextKey ? nextKey.panelUri : undefined;
+  }
 }

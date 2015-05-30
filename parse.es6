@@ -1,7 +1,7 @@
 import XRegExp from 'xregexp';
 
-const SCHEMA_REGEX = /https?:\/\//;
 const TRAILING_SLASH_REGEX = /\/$/;
+const SCHEMA_REGEX = /https?:\/\//;
 // TODO Simplify regex and remove XRegExp dependency
 const URI_REGEX = XRegExp(
   '^(?<schema> [^:/?]+ ) ://   # aka protocol   \n\
@@ -16,7 +16,7 @@ export default function parse(uri) {
   let nextUri = TRAILING_SLASH_REGEX.test(uri) ? uri : `${uri}/`;
 
   do {
-    let parsed = XRegExp.exec(nextUri, URI_REGEX);
+    const parsed = XRegExp.exec(nextUri, URI_REGEX);
 
     if (parsed && parsed.schema && parsed.host) {
       let path = parsed.path;
@@ -35,7 +35,7 @@ export default function parse(uri) {
         path = path.slice(0, path.length - 1).join('/');
         pathBits.push(path || '/');
       } while(path.length);
-      let uniquePathBits = new Set(pathBits.sort());
+      const uniquePathBits = new Set(pathBits.sort());
       // TODO Should we bring the query bit in?
       uniquePathBits.forEach(bit => keys.push(`${parsed.schema}://${parsed.host}${bit}`));
     } else {
@@ -43,5 +43,12 @@ export default function parse(uri) {
     }
   } while(nextUri);
 
-  return keys;
+  let currentUri = [];
+  keys.reduce((prev, key, i) => {
+    const ret = prev + key;
+    currentUri[i] = ret;
+    return ret;
+  }, '');
+
+  return keys.map((panelUri, i) => ({panelUri, currentUri: currentUri[i]}));
 }

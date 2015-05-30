@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.0] - 2015-05-30
+### Added
+
+- `Store#nextUri(from)`. With `from` being a `currentUri` we can now tell whether an action is
+  active or not based on the next panel's URI.
+
+### Changed
+
+- Made store keys hold an object rather than a single string. It has two keys now, `currentUri`
+  which tells the 'live' URI up until this panel and `panelUri` which is, as before, the URI of the
+  panel we should be loading on that position.
+
 ## [0.2.3] - 2015-05-24
 ### Added
 
