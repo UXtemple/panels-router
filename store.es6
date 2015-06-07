@@ -26,7 +26,7 @@ export default class RouterStore extends Store {
 
   navigate(uri) {
     this.setState(this.state.merge({
-      uri: uri,
+      uri,
       keys: List(parse(uri))
     }));
   }

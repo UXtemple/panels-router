@@ -10,10 +10,14 @@ const URI_REGEX = XRegExp(
     (?<query>  .*      )       # optional query', 'x'
 );
 
+function trailingSlash(uri) {
+  return TRAILING_SLASH_REGEX.test(uri) ? uri : `${uri}/`;
+}
+
 export default function parse(uri) {
   let keys = [];
   // Make sure we always have a trailing slash on the URI
-  let nextUri = TRAILING_SLASH_REGEX.test(uri) ? uri : `${uri}/`;
+  let nextUri = trailingSlash(uri);
 
   do {
     const parsed = XRegExp.exec(nextUri, URI_REGEX);
@@ -45,9 +49,9 @@ export default function parse(uri) {
 
   let currentUri = [];
   keys.reduce((prev, key, i) => {
-    const ret = prev + key;
-    currentUri[i] = ret;
-    return ret;
+    const keyLastFwdSlash = key.lastIndexOf('/') + 1;
+    const sharesRoot = new RegExp(`${key.substr(0, keyLastFwdSlash)}$`);
+    return currentUri[i] = trailingSlash(prev + (sharesRoot.test(prev) ? key.substr(keyLastFwdSlash, key.length) : key));
   }, '');
 
   return keys.map((panelUri, i) => ({panelUri, currentUri: currentUri[i]}));

@@ -1,9 +1,11 @@
 # Change log
 
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+## [0.4.0] - 2015-06-07
+### Added
 
-## [0.3.0] - 2015-05-30
+- Teleports support through a better use of `currentUri` on each key - it now remembers the current app and refers to it as it should.
+
+# [0.3.0] - 2015-05-30
 ### Added
 
 - `Store#nextUri(from)`. With `from` being a `currentUri` we can now tell whether an action is
