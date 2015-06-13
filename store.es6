@@ -1,39 +1,27 @@
-import { List } from 'immutable';
-import parse from './parse';
-import { StateRecord } from './records';
+import 'core-js/modules/es6.array.find-index';
 import { Store } from 'flummox';
+import i from 'seamless-immutable';
+import parse from './parse';
+
+export function navigate(state, uri) {
+  return i({panels: parse(uri), uri});
+}
 
 export default class RouterStore extends Store {
-  static assignState(oldState, newState) {
-    return newState;
-  }
+  static assignState(oldState, newState) { return newState }
 
   constructor(flux) {
     super();
-
-    const actionIds = flux.getActionIds('router');
-    this.register(actionIds.navigate, this.navigate);
-
-    this.state = new StateRecord();
+    this.state = i({panels: [], uri: undefined});
+    this.register(flux.getActionIds('router').navigate, uri => this.setState(navigate(this.state, uri)));
   }
 
-  // @attr('keys')
-  get keys() { return this.state.keys }
-  // @attr('lastPanelUri', () => this.keys.last()) // ?
-  get lastPanelUri() { return this.keys.last() }
-  // @attr('uri')
+  get last() { return this.state.panels[this.panels.length - 1] }
+  get panels() { return this.state.panels.asMutable() }
   get uri() { return this.state.uri }
 
-  navigate(uri) {
-    this.setState(this.state.merge({
-      uri,
-      keys: List(parse(uri))
-    }));
-  }
-
-  nextUri(after) {
-    const index = this.state.keys.findIndex(({currentUri}) => currentUri === after);
-    const nextKey = this.state.keys.get(index + 1);
-    return nextKey ? nextKey.panelUri : undefined;
+  after(context) {
+    const index = this.state.panels.findIndex(panel => panel.context === context);
+    return this.state.panels[index + 1];
   }
 }

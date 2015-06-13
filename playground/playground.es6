@@ -1,51 +1,40 @@
 import * as PanelsRouter from '../index';
-import * as Flummox from 'flummox';
-import FluxComponent from 'flummox/component';
-import React from 'react';
+import { Flux } from 'flummox';
+import { FluxComponent } from 'flummox/addons/react';
+import React, { Component, PropTypes } from 'react';
 
-window.Playground = {
-  Flummox,
-  FluxComponent,
-  PanelsRouter
-};
-
-console.log('Welcome to panels-router playground.');
-console.log('https://github.com/UXtemple/panels-router');
-console.log('Playground module', Playground);
-class View extends React.Component {
-  constructor(props) {
-    super(props);
-    this.navigate = this.props.flux.getActions('router').navigate;
-  }
-
+class View extends Component {
   render() {
-    let keysView = this.props.keys.map((key, i) => {
-      return (
-        <li key={i} style={style.link}>
-          <a href={key} onClick={event => event.preventDefault() && this.navigate(event.target.href)}>{key}</a>
-        </li>
-      );
-    });
+    const { navigate } = this.props;
+    const panels = this.props.panels.map((key, i) =>
+      <li key={i} style={style.link}>
+        <a href={key.uri} onClick={event => event.preventDefault() && navigate(key.uri)}>{key.uri}</a>
+      </li>
+    );
 
     return (
       <div>
         <div>
           <label htmlFor='uri' style={style.label}>URI to parse</label>
           <input id='uri' ref='uri' value={this.props.uri} placeholder='original URI'
-            onChange={() => this.navigate(React.findDOMNode(this.refs.uri).value)} style={style.input} />
+            onChange={() => navigate(React.findDOMNode(this.refs.uri).value)} style={style.input} />
         </div>
-        <ol>{keysView}</ol>
+        <ol>{panels}</ol>
       </div>
     )
   }
-}
-View.propTypes = {
-  keys: React.PropTypes.object.isRequired,
-  uri: React.PropTypes.string.isRequired
-}
-View.defaultProps = {
-  keys: {},
-  uri: ''
+
+  static propTypes = {
+    panels: PropTypes.arrayOf(PropTypes.shape({
+      context: PropTypes.string.isRequired,
+      uri: PropTypes.string.isRequired
+    })),
+    uri: PropTypes.string
+  }
+  static defaultProps = {
+    panels: [],
+    uri: ''
+  }
 }
 
 const style = {
@@ -53,6 +42,7 @@ const style = {
     border: '1px solid #f2f2f2',
     borderRadius: 10,
     margin: '0 20px',
+    outline: 0,
     padding: '10px 20px'
   },
   label: {
@@ -67,21 +57,14 @@ const style = {
 }
 
 class ViewContainer extends FluxComponent {
-  get stores() {
-    return {
-      router: store => ({
-        keys: store.keys,
-        uri: store.uri
-      })
-    };
-  }
-
   render() {
-    return <FluxComponent connectToStores={this.stores}><View /></FluxComponent>;
+    return <FluxComponent
+      actions={{router: ({navigate}) => ({navigate})}}
+      stores={{router: ({panels, uri}) => ({panels, uri})}}><View /></FluxComponent>;
   }
 }
 
-class FluxApp extends Flummox.Flux {
+class FluxApp extends Flux {
   constructor() {
     super();
 
@@ -101,3 +84,12 @@ React.render(
   </FluxComponent>,
   document.getElementById('playground-container')
 );
+
+window.Playground = {
+  flux,
+  PanelsRouter
+};
+
+console.log('Welcome to panels-router playground.');
+console.log('https://github.com/UXtemple/panels-router');
+console.log('Playground module', Playground);

@@ -15,7 +15,7 @@ function trailingSlash(uri) {
 }
 
 export default function parse(uri) {
-  let keys = [];
+  let panels = [];
   // Make sure we always have a trailing slash on the URI
   let nextUri = trailingSlash(uri);
 
@@ -41,18 +41,18 @@ export default function parse(uri) {
       } while(path.length);
       const uniquePathBits = new Set(pathBits.sort());
       // TODO Should we bring the query bit in?
-      uniquePathBits.forEach(bit => keys.push(`${parsed.schema}://${parsed.host}${bit}`));
+      uniquePathBits.forEach(bit => panels.push(`${parsed.schema}://${parsed.host}${bit}`));
     } else {
       nextUri = undefined;
     }
   } while(nextUri);
 
-  let currentUri = [];
-  keys.reduce((prev, key, i) => {
-    const keyLastFwdSlash = key.lastIndexOf('/') + 1;
-    const sharesRoot = new RegExp(`${key.substr(0, keyLastFwdSlash)}$`);
-    return currentUri[i] = trailingSlash(prev + (sharesRoot.test(prev) ? key.substr(keyLastFwdSlash, key.length) : key));
+  let contexts = [];
+  panels.reduce((prev, panel, i) => {
+    const lastFwdSlash = panel.lastIndexOf('/') + 1;
+    const sharesRoot = new RegExp(`${panel.substr(0, lastFwdSlash)}$`);
+    return contexts[i] = trailingSlash(prev + (sharesRoot.test(prev) ? panel.substr(lastFwdSlash, panel.length) : panel));
   }, '');
 
-  return keys.map((panelUri, i) => ({panelUri, currentUri: currentUri[i]}));
+  return panels.map((uri, i) => ({uri, context: contexts[i]}));
 }

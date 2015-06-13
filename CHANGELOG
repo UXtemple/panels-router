@@ -1,5 +1,18 @@
 # Change log
 
+## [0.5.0] - 2015-06-13
+### Changed
+
+- Updated example in Playground to inject stores and actions into the dumb component.
+- Renamed `keys` to `panels` and its objects from: `{currentUri, panelUri}` to `{context, uri}` to
+  resemble better what they do.
+- Removed actions class. Export raw functions.
+- Extracted store functionality into raw functions too getting them ready to be stripped off their
+  state soon.
+- Replaced `immutable-js` for `seamless-immutable` as it is lighter and its output are cleaner and
+  backwards compatible with vanilla JS types.
+- Removed the immutable record.
+
 ## [0.4.0] - 2015-06-07
 ### Added
 
