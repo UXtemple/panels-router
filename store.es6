@@ -3,7 +3,7 @@ import { Store } from 'flummox';
 import i from 'seamless-immutable';
 import parse from './parse';
 
-export function navigate(state, uri) {
+export function navigate(uri, payload, state) {
   return i({panels: parse(uri), uri});
 }
 
@@ -13,7 +13,7 @@ export default class RouterStore extends Store {
   constructor(flux) {
     super();
     this.state = i({panels: [], uri: undefined});
-    this.register(flux.getActionIds('router').navigate, uri => this.setState(navigate(this.state, uri)));
+    this.register(flux.getActionIds('router').navigate, navigate(this.state, uri));
   }
 
   getStateAsObject() {
