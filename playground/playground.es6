@@ -60,7 +60,7 @@ class ViewContainer extends FluxComponent {
   render() {
     return <FluxComponent
       actions={{router: ({navigate}) => ({navigate})}}
-      stores={{router: ({panels, uri}) => ({panels, uri})}}><View /></FluxComponent>;
+      stores={{router: ['panels', 'uri']}}><View /></FluxComponent>;
   }
 }
 

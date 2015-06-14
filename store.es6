@@ -16,9 +16,14 @@ export default class RouterStore extends Store {
     this.register(flux.getActionIds('router').navigate, uri => this.setState(navigate(this.state, uri)));
   }
 
+  getStateAsObject() {
+    return {
+      panels: this.state.panels.asMutable(),
+      uri: this.state.uri
+    }
+  }
+
   get last() { return this.state.panels[this.panels.length - 1] }
-  get panels() { return this.state.panels.asMutable() }
-  get uri() { return this.state.uri }
 
   after(context) {
     const index = this.state.panels.findIndex(panel => panel.context === context);

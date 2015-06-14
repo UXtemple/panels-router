@@ -6,11 +6,12 @@ export default function history(flux, onChange) {
   window.addEventListener('popstate', event => flux.getActions('router').navigate(location.href));
 
   router.on('change', () => {
-    if (router.uri !== window.location.href) {
-      window.history.pushState(null, null, router.uri);
+    const { uri } = router.state;
+    if (uri !== window.location.href) {
+      window.history.pushState(null, null, uri);
 
       if (typeof onChange === 'function') {
-        onChange(router.last.uri, router.uri);
+        onChange(router.last.uri, uri);
       }
     }
   });
