@@ -13,7 +13,7 @@ export default class RouterStore extends Store {
   constructor(flux) {
     super();
     this.state = i({panels: [], uri: undefined});
-    this.register(flux.getActionIds('router').navigate, navigate(this.state, uri));
+    this.register(flux.getActionIds('router').navigate, navigate);
   }
 
   getStateAsObject() {
