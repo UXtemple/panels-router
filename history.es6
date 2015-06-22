@@ -1,18 +1,17 @@
-// @param flux  Flux
-// @param onChange  function   Called when the route changes. `onChange(panelUri, fullUri)`.
-export default function history(flux, onChange) {
-  const router = flux.getStore('router');
+export default function history(redux, navigate) {
+  const navigateHandler = () => navigate(location.href);
 
-  window.addEventListener('popstate', event => flux.getActions('router').navigate(location.href));
+  window.addEventListener('popstate', navigateHandler);
 
-  router.on('change', () => {
-    const { uri } = router.state;
-    if (uri !== window.location.href) {
+  const unsubscribe = redux.subscribe(() => {
+    const { uri } = redux.getState().router;
+    if (uri !== location.href) {
       window.history.pushState(null, null, uri);
-
-      if (typeof onChange === 'function') {
-        onChange(router.last.uri, uri);
-      }
     }
   });
+
+  return function() {
+    window.removeEventListener('popstate', navigateHandler);
+    unsubscribe();
+  }
 }

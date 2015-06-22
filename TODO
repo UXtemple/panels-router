@@ -1,0 +1,4 @@
+# TODO
+- update playground.
+- replace XRegExp for normal regular expressions.
+- support more complex operations on URIs such as actions, slices, etc.

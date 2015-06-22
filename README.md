@@ -3,25 +3,20 @@
 _Teleport all the things :)._
 
 `PanelsRouter` is in charge of understanding `panels` URIs which are the base of our logic.
-It implements `Flux` through [flummox](https://acdlite.github.io/flummox).
 
 ## API
 
 ### Actions
-
 - `#navigate(uri)`: go to a URI
 
 ### history
-
-- `#history`: `pushstate` and `onpopstate` handler
+- `#history`: `pushstate` and `popstate` handler
 
 ### Parser
-
 - `#parse(uri)`: parses a panels URI
 
 ### Store
-
-- `#keys`: the list of panels' keys that represent the application
+- `#panels`: the list of panels' keys that represent the application
 - `#uri`: the application's URI
 
 ## Install deps

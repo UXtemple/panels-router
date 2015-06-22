@@ -1,3 +1,8 @@
+import { NAVIGATE } from './action-types';
+
 export function navigate(uri) {
-  return uri;
+  return {
+    type: NAVIGATE,
+    uri
+  };
 }

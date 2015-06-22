@@ -1,6 +1,4 @@
 import * as PanelsRouter from '../index';
-import { Flux } from 'flummox';
-import { FluxComponent } from 'flummox/addons/react';
 import React, { Component, PropTypes } from 'react';
 
 class View extends Component {
