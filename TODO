@@ -1,5 +1,4 @@
 # TODO
-- update playground.
 - replace XRegExp for normal regular expressions.
 - extract window-spy into its own package and call it object-spy as it's actually more generic.
 - support more complex operations on URIs such as actions, slices, etc.

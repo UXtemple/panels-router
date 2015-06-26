@@ -1,20 +1,21 @@
 #!/usr/bin/env babel-node
 
-import koa from 'koa';
-import sendfile from 'koa-sendfile';
-import serve from 'koa-static';
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import config from './webpack.config';
 
-let app = koa();
-app.use(serve('./playground'));
-app.use(catchAll);
-app.listen(3000);
-
-function *catchAll(next) {
-  yield* sendfile.call(this, './playground/index.html');
-
-  if (!this.status) {
-    this.throw(404);
+new WebpackDevServer(webpack(config), {
+  contentBase: './playground',
+  publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true,
+  stats: {
+    colors: true
   }
-}
+}).listen(3000, 'localhost', err => {
+  if (err) {
+    console.log(err);
+  }
 
-console.log('koa-catch-all is ready on http://localhost:3000');
+  console.log('Listening at localhost:3000');
+});
