@@ -1,6 +1,7 @@
 # Change log
 
-## [unreleased]
+## [0.6.0] - 2015-06-26
+### Changed
 - Moved to redux
 
 ## [0.5.4] - 2015-06-15
