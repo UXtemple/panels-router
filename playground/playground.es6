@@ -1,13 +1,14 @@
 import * as PanelsRouter from '../index';
 import React from 'react';
-import { App, redux } from './app';
+import ReactDOM from 'react-dom';
+import { App, store } from './app';
 
 window.Playground = {
-  redux,
+  store,
   PanelsRouter
 };
 
-React.render(<App />, document.getElementById('playground-container'));
+ReactDOM.render(<App />, document.getElementById('playground-container'));
 
 console.log('Welcome to panels-router playground.');
 console.log('https://github.com/UXtemple/panels-router');

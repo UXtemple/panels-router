@@ -1,5 +1,10 @@
 # Change log
 
+## [0.7.0] - 2015-07-24
+### Changed
+- ActionCreators to [FSA](https://github.com/acdlite/flux-standard-action).
+- Examples to redux 1.0.0-rc.
+
 ## [0.6.0] - 2015-06-26
 ### Changed
 - Moved to redux

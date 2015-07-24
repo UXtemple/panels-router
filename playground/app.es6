@@ -1,11 +1,12 @@
-import { Actions, getters, history, reducer as router } from '../index';
-import { createRedux } from 'redux';
-import { connect, provide } from 'redux/react';
-import React, { Component, PropTypes } from 'react';
+import { actions, getters, history, reducer as router } from '../index';
+import { createStore, combineReducers } from 'redux';
+import { connect, provide } from 'react-redux';
+import React, { PropTypes } from 'react';
 
-export const redux = createRedux({router});
+const reducer = combineReducers({router});
+export const store = createStore(reducer);
 
-const historyUnsubscribe = history(redux, uri => redux.dispatch(Actions.navigate(uri)));
+const historyUnsubscribe = history(store, uri => store.dispatch(actions.navigate(uri)));
 
 const style = {
   input: {
@@ -65,19 +66,19 @@ class Router {
   panels: getters.panels(router),
   uri: router.uri
 }))
-class RouterContainer extends Component {
+class RouterContainer {
   render() {
     const { dispatch, panels, uri } = this.props;
 
-    return <Router uri={uri} panels={panels} navigate={uri => dispatch(Actions.navigate(uri))} />
+    return <Router uri={uri} panels={panels} navigate={uri => dispatch(actions.navigate(uri))} />
   }
 }
 
-@provide(redux)
+@provide(store)
 export class App {
   render() {
     return <RouterContainer />;
   }
 }
 
-redux.dispatch(Actions.navigate(location.href))
+store.dispatch(actions.navigate(location.href))

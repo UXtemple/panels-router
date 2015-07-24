@@ -6,8 +6,8 @@ const URI = '/';
 
 describe('actions', () => {
   it('#navigate', () => {
-    const {type, uri} = navigate(URI);
+    const {type, payload} = navigate(URI);
     assert(type === NAVIGATE, 'type');
-    assert(uri === URI, 'payload: uri');
+    assert(payload.uri === URI, 'payload: uri');
   });
 });
